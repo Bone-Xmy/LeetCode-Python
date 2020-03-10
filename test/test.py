@@ -1,18 +1,15 @@
-class Solution():
-    def hello(self):
-        a = "hualala"
-        print(a)
-        for i in range(5):
-            print(i)
+from collections import defaultdict
 
-        print('===========')
-        b = [1,1,1]
-        del b[0]
-        b[5] = 2
-        self.foo(b)
+def test_dict():
+    rows = [defaultdict(int) for i in range(9)]
 
-    def foo(self, l):
-        for i in l:
-            print(i)
+    rows[0][1] += 1
+    print("1 这个 key 的值为：" + str(rows[0][1]))
+    rows[0][1] -= 1
+    print("1 这个 key 的值为：" + str(rows[0][1]))
 
-Solution().hello()
+    print("1 是否在rows[0]中：" + str(1 in rows[0]))
+    print(1 in rows[1])
+
+if __name__ == "__main__":
+    test_dict()

@@ -26,9 +26,20 @@ class Solution:
             Remove a number which didn't lead 
             to a solution
             """
+            
             del rows[row][d]
             del columns[col][d]
             del boxes[box_index(row, col)][d]
+            """
+            注意：不能使用下面的方法，因为如果调用place_number方法将
+                 数字d记录到dict里面后，则对应的key就是d的值，这个值
+                 将一直存在
+                 下面的方式只是将dict里面的key对应的value的值减少1，
+                 当执行 d in rows[row] 等方法的时候将返回 True
+            """
+            # rows[row][d] -= 1
+            # columns[col][d] -= 1
+            # boxes[box_index(row, col)][d] -= 1
             board[row][col] = '.'    
             
         def place_next_numbers(row, col):
@@ -79,6 +90,10 @@ class Solution:
         box_index = lambda row, col: (row // n ) * n + col // n
         
         # init rows, columns and boxes
+        """
+        生成一个列表，列表的每一个元素都是一个dict，
+        并且当访问字典的元素不存在的时候返回默认值0
+        """
         rows = [defaultdict(int) for i in range(N)]
         columns = [defaultdict(int) for i in range(N)]
         boxes = [defaultdict(int) for i in range(N)]
@@ -90,3 +105,9 @@ class Solution:
         
         sudoku_solved = False
         backtrack()
+
+if __name__ == "__main__":
+    board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
+    solution = Solution()
+    solution.solveSudoku(board)
+    print(board)
