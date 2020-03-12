@@ -27,7 +27,7 @@ class Solution():
         self.backtrack()
 
     def solveSudoku(self, board):
-        pass
+        self.init_board(board)
 
     def could_place(self, d, row, col):
         """
@@ -89,3 +89,9 @@ class Solution():
         del self.columns[col][d]
         del self.boxes[self.box_index(row, col)][d]
         self.board[row][col] = '.'
+
+if __name__ == "__main__":
+    board = [["5","3",".",".","7",".",".",".","."],["6",".",".","1","9","5",".",".","."],[".","9","8",".",".",".",".","6","."],["8",".",".",".","6",".",".",".","3"],["4",".",".","8",".","3",".",".","1"],["7",".",".",".","2",".",".",".","6"],[".","6",".",".",".",".","2","8","."],[".",".",".","4","1","9",".",".","5"],[".",".",".",".","8",".",".","7","9"]]
+    s = Solution()
+    s.init_board(board)
+    print(s.board)
